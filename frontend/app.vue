@@ -129,7 +129,7 @@ const updateByID = ref({
 })
 
 // Base URL to your API (adjust if different)
-const BASE_URL = 'https://reimagined-tribble-qg469wrqqjgh94rw-8000.app.github.dev/api/items'
+const BASE_URL = 'https://reimagined-tribble-qg469wrqqjgh94rw-8000.app.github.dev/items'
 
 // 1) GET /items
 async function fetchItems() {

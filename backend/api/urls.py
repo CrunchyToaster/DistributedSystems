@@ -1,10 +1,11 @@
+# backend/api/urls.py
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import ItemViewSet
 
-router = DefaultRouter()
-router.register(r'items', ItemViewSet, basename='item')
+router = DefaultRouter(trailing_slash=True)   # ← no “/” at the end
+# equivalent:  SimpleRouter(trailing_slash=False)
 
-urlpatterns = [
-    path('', include(router.urls)),
-]
+router.register(r'', ItemViewSet, basename='items')
+
+urlpatterns = router.urls          # no need for an extra list wrapper
