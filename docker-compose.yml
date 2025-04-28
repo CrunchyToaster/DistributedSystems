@@ -3,8 +3,10 @@ version: "3.9"
 services:
   web:
     build: ./backend
-    container_name: django_backend
-    command: python manage.py runserver 0.0.0.0:8000
+    container_name: web
+    command: >
+      sh -c "python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./backend:/app
     ports:
@@ -22,7 +24,7 @@ services:
       
   db:
     image: postgres:15
-    container_name: postgres_db
+    container_name: db
     environment:
       POSTGRES_DB: "mydb"
       POSTGRES_USER: "myuser"
@@ -32,9 +34,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
-  frontend:
+  frontendflask:
+    container_name: frontendflask
+    image: maeddes/hse25frontend:flask
+    ports:
+      - "5000:5000"
+    environment:
+      - API_SERVER_URL=http://web:8000
+
+  frontendnuxt:
     build: ./frontend
-    container_name: nuxt_frontend
+    container_name: frontendnuxt
     ports:
       - "3000:3000"
     # For local dev with hot reload, mount your code:
