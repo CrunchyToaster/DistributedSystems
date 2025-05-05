@@ -27,4 +27,5 @@ urlpatterns = [
     path('', home, name='home'),
     path("admin/", admin.site.urls),
     path('items/', include('api.urls')),
+    path('items', include('api.urls'))
 ]
