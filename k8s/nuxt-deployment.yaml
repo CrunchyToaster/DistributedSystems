@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nuxt
+  namespace: staging
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nuxt
+  template:
+    metadata:
+      labels:
+        app: nuxt
+    spec:
+      containers:
+      - name: nuxt
+        image: ghcr.io/crunchytoaster/crunchytoaster-nuxt:005e6b86
+        ports:
+        - containerPort: 3000
+        env:
+        - name: API_SERVER_URL
+          value: http://web:8000
