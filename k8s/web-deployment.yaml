@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: django
-        image: ghcr.io/crunchytoaster/crunchytoaster-web:005e6b86
+        image: ghcr.io/crunchytoaster/crunchytoaster-web:latest
         ports:
         - containerPort: 8000
         env:

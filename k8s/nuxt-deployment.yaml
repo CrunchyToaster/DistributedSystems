@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nuxt
-        image: ghcr.io/crunchytoaster/crunchytoaster-nuxt:005e6b86
+        image: ghcr.io/crunchytoaster/crunchytoaster-nuxt:latest
         ports:
         - containerPort: 3000
         env:
