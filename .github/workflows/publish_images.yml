@@ -36,11 +36,13 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/crunchytoaster-web:${{ env.TAG }}
+          tags: |
+            ghcr.io/crunchytoaster/crunchytoaster-web:${{ env.TAG }}
 
       - name: Build & push Nuxt frontend
         uses: docker/build-push-action@v4
         with:
           context: ./frontend
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/crunchytoaster-nuxt:${{ env.TAG }}
+          tags: |
+            ghcr.io/crunchytoaster/crunchytoaster-nuxt:${{ env.TAG }}
