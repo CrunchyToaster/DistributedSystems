@@ -46,3 +46,26 @@ jobs:
           push: true
           tags: |
             ghcr.io/crunchytoaster/crunchytoaster-nuxt:${{ env.TAG }}
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.27.3'
+
+      - name: Configure Kubeconfig
+        run: |
+          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 --decode > $HOME/.kube/config
+
+      - name: Update web Deployment
+        run: |
+          kubectl set image deployment/web \
+            django=ghcr.io/crunchytoaster/crunchytoaster-web:${{ env.TAG }} \
+            -n staging
+          kubectl rollout status deployment/web -n staging
+
+      - name: Update nuxt Deployment
+        run: |
+          kubectl set image deployment/nuxt \
+            nuxt=ghcr.io/crunchytoaster/crunchytoaster-nuxt:${{ env.TAG }} \
+            -n staging
+          kubectl rollout status deployment/nuxt -n staging
