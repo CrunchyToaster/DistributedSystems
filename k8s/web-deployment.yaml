@@ -16,6 +16,7 @@ spec:
       containers:
       - name: django
         image: ghcr.io/crunchytoaster/crunchytoaster-web:latest
+        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
         ports:
         - containerPort: 8000
         env:
