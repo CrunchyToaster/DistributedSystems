@@ -65,6 +65,10 @@ Run:
 docker-compose up --build
 ```
 
+```bash
+docker compose run web python manage.py migrate
+```
+
 ### Kubernetes
 ```bash
 kubectl apply -f k8s/
