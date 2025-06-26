@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nuxt
+  name: nuxt-frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: nuxt
+      app: nuxt-frontend
   template:
     metadata:
       labels:
-        app: nuxt
+        app: nuxt-frontend
     spec:
       containers:
       - name: nuxt
         image: ghcr.io/crunchytoaster/crunchytoaster-nuxt:latest
+        env:
+        - name: API_URL
+          value: "http://django:8000"
         ports:
         - containerPort: 3000
-        env:
-        - name: API_SERVER_URL
-          value: http://web:8000

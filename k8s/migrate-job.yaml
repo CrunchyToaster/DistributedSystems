@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-migrate
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: OnFailure
+
+      # 1) This initContainer will loop until Postgres is ready
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:15
+          env:
+            - name: PGPASSWORD
+              value: "postgres"
+          command:
+            - sh
+            - -c
+            - |
+              until pg_isready -h postgres -U postgres; do
+                echo "Waiting for Postgres…"
+                sleep 2
+              done
+      containers:
+      - name: migrate
+        image: ghcr.io/crunchytoaster/crunchytoaster-web:latest
+        command:
+          - python
+          - manage.py
+          - migrate
+          - "--noinput"
+        env:
+            - name: POSTGRES_DB
+              value: "postgres"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: POSTGRES_HOST
+              value: "postgres"
+            - name: POSTGRES_PORT
+              value: "5432"

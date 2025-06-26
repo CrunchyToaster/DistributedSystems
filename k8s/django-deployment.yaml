@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:15
+          env:
+            - name: PGPASSWORD
+              value: "postgres"
+          command:
+            - sh
+            - -c
+            - |
+              until pg_isready -h postgres -U postgres; do
+                echo "Waiting for Postgres…"
+                sleep 2
+              done
+      containers:
+        - name: web
+          image: ghcr.io/crunchytoaster/crunchytoaster-web:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_DB
+              value: "postgres"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: POSTGRES_HOST
+              value: "postgres"
+            - name: POSTGRES_PORT
+              value: "5432"
