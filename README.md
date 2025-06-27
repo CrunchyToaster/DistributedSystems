@@ -21,13 +21,6 @@ It consists of a NuxtJS frontend and a Django backend using a PostgreSQL databas
 - **Backend**: Django+ Django REST Framework  
 - **Database**: PostgreSQL via Docker
 
-## Prerequisites
-- **Python**
-- **Node.js** & **npm**  
-- **Docker** & **Docker Compose** 
-- **kind** 
-- **kubectl**  
-
 ## Docker Images
 Backend: 
 ```bash
@@ -52,6 +45,7 @@ docker compose run web python manage.py migrate
 ```
 
 ### Kubernetes
+Make sure kind is installed and a cluster has been created before running these commands:
 ```bash
 kubectl apply -f k8s/
 ```
