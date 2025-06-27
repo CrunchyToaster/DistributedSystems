@@ -55,7 +55,7 @@ kubectl port-forward svc/nuxt 3000:3000
 ```
 
 ```bash
-kubectl port-forward svc/web 8000:8000
+kubectl port-forward svc/django 8000:8000
 ```
 
 ## API

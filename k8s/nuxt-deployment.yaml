@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nuxt-frontend
+  name: nuxt
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nuxt-frontend
+      app: nuxt
   template:
     metadata:
       labels:
-        app: nuxt-frontend
+        app: nuxt
     spec:
       containers:
       - name: nuxt

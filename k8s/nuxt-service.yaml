@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nuxt-frontend
+  name: nuxt
 spec:
   type: ClusterIP
   selector:
-    app: nuxt-frontend
+    app: nuxt
   ports:
   - port: 3000
     targetPort: 3000
