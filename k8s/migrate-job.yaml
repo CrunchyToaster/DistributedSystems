@@ -7,8 +7,6 @@ spec:
   template:
     spec:
       restartPolicy: OnFailure
-
-      # 1) This initContainer will loop until Postgres is ready
       initContainers:
         - name: wait-for-postgres
           image: postgres:15

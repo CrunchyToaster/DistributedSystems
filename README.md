@@ -9,7 +9,6 @@ It consists of a NuxtJS frontend and a Django backend using a PostgreSQL databas
 2. [Prerequisites](#prerequisites)  
 3. [Docker Images](#docker-images)
 4. [Quickstart](#quickstart)  
-   - [Local](#local)  
    - [Docker](#docker)  
    - [Kubernetes](#kubernetes)  
 5. [API](#api)  
@@ -41,23 +40,6 @@ ghcr.io/crunchytoaster/crunchytoaster-nuxt:latest
 ```
 
 ## Quickstart
-### Local
-
-1. Backend
-    ```bash
-    cd backend
-    python3 -m venv .venv
-    source .venv/bin/activate
-    pip install -r requirements.txt
-    python manage.py migrate
-    python manage.py runserver 0.0.0.0:8000
-    ```
-2. Frontend
-    ```bash
-    cd frontend
-    npm install
-    npm run dev
-    ```
 
 ### Docker
 Run:
@@ -90,10 +72,10 @@ kubectl port-forward svc/web 8000:8000
 #### Endpoints:
 | Method | Path | Description |
 | ------ | --- | ---|
-| GET    | `/items` | List all items|
-| POST | `/itmes` |  Create or Update item by name |
-| PUT | `/items/{id}`|Update item by ID|
-| DELETE | `/items/{id}` | Delete an item by ID |
+| GET    | `/items/` | List all items|
+| POST | `/items/` |  Create or Update item by name |
+| PUT | `/items/{id}/`|Update item by ID|
+| DELETE | `/items/{id}/` | Delete an item by ID |
 
 ## 12 Factors
 This project aligns with the 12 Factor App methodology to ensure portability, scalability and maintainability:
